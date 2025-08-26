@@ -29,7 +29,14 @@ export default function Home() {
     <main>
       <ul>
         {todos.map((t) => (
-          <li key={t.id}>{t.text}</li>
+          <li key={t.id}>
+            <span>{t.text}</span>
+            <button
+              onClick={() => setTodos(todos.filter(({ id }) => t.id !== id))}
+            >
+              🗑️
+            </button>
+          </li>
         ))}
       </ul>
     </main>

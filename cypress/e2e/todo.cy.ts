@@ -8,7 +8,7 @@ describe("todo", () => {
 
   it("should be able to delete a todo", () => {
     cy.visit("http://localhost:3000");
-    cy.contains("Feed the cat").find("button").click();
+    cy.contains("Feed the cat").parent().find("button").click();
     cy.get("li").should("have.length", 2);
     cy.contains("Feed the cat").should("not.exist");
   });
