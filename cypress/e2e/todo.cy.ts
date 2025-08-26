@@ -5,4 +5,11 @@ describe("todo", () => {
     cy.get("li").first().should("contain.text", "Feed the cat");
     cy.get("li").last().contains("Walk all the cats");
   });
+
+  it("should be able to delete a todo", () => {
+    cy.visit("http://localhost:3000");
+    cy.contains("Feed the cat").find("button").click();
+    cy.get("li").should("have.length", 2);
+    cy.contains("Feed the cat").should("not.exist");
+  });
 });
