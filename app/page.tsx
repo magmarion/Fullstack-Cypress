@@ -1,44 +1,12 @@
-"use client";
+import { db } from "@/prisma/db";
+import TodoList from "./ui/todo-list";
 
-import { useState } from "react";
-
-interface Todo {
-  id: string;
-  text: string;
-}
-
-const mockedTodos: Todo[] = [
-  {
-    id: "1",
-    text: "Feed the cat",
-  },
-  {
-    id: "2",
-    text: "Ignore the dog",
-  },
-  {
-    id: "3",
-    text: "Walk all the cats",
-  },
-];
-
-export default function Home() {
-  const [todos, setTodos] = useState(mockedTodos);
+export default async function Home() {
+  const todos = await db.todo.findMany();
 
   return (
     <main>
-      <ul>
-        {todos.map((t) => (
-          <li key={t.id}>
-            <span>{t.text}</span>
-            <button
-              onClick={() => setTodos(todos.filter(({ id }) => t.id !== id))}
-            >
-              🗑️
-            </button>
-          </li>
-        ))}
-      </ul>
+      <TodoList defaultTodos={todos} />
     </main>
   );
 }
