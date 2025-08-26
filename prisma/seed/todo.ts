@@ -1,7 +1,7 @@
 import { Todo } from "@/generated/prisma";
-import { db } from "./db";
+import { db } from "../db";
 
-async function main() {
+export async function seedTodos() {
   const mockedTodos: Todo[] = [
     {
       id: "68adb30b0c2c50f13d0a64e9",
@@ -25,13 +25,3 @@ async function main() {
     });
   }
 }
-
-main()
-  .then(async () => {
-    await db.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await db.$disconnect();
-    process.exit(1);
-  });
