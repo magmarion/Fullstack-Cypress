@@ -6,7 +6,6 @@ type Link = {
   userId: string
   originalUrl: string
   shortCode: string
-  clicks: number
   createdAt: string // Prisma skickar Date som ISO-string i JSON
 }
 
@@ -36,10 +35,10 @@ export default function LinkList() {
     <div>
       <input value={url} onChange={e => setUrl(e.target.value)} placeholder="Long URL" />
       <button onClick={createLink}>Create Short URL</button>
-      <ul>
+      <ul className="mt-4 space-y-2">
         {links.map(link => (
-          <li key={link.id}>
-            <a href={`/${link.shortCode}`} target="_blank">{link.shortCode}</a> - {link.originalUrl} ({link.clicks} clicks)
+          <li key={link.id} className="p-2 border rounded">
+            <a href={`/${link.shortCode}`} target="_blank" className="font-bold text-blue-600">{link.shortCode}</a> - {link.originalUrl}
           </li>
         ))}
       </ul>
