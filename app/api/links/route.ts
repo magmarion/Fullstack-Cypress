@@ -7,23 +7,27 @@ export async function GET() {
     return Response.json(links)
 }
 
-// POST: skapa en ny länk
 export async function POST(req: Request) {
-    const { originalUrl } = await req.json()
+    try {
+        const { originalUrl } = await req.json()
 
-    if (!originalUrl || !originalUrl.startsWith("http")) {
-        return new Response("Invalid URL", { status: 400 })
+        if (!originalUrl || !originalUrl.startsWith("http")) {
+            return new Response(JSON.stringify({ error: "Invalid URL" }), { status: 400, headers: { "Content-Type": "application/json" } })
+        }
+
+        const link = await db.link.create({
+            data: {
+                originalUrl,
+                shortCode: Math.random().toString(36).substring(2, 8),
+                userId: "68b45d1bc433b7c3d986cb66", // Hårdkodad userId för enkelhetens skull
+            },
+        })
+
+        return new Response(JSON.stringify(link), { headers: { "Content-Type": "application/json" } })
+    } catch (err) {
+        console.error(err)
+        return new Response(JSON.stringify({ error: "Server error" }), { status: 500, headers: { "Content-Type": "application/json" } })
     }
-
-    const shortCode = Math.random().toString(36).substring(2, 8)
-
-    const link = await db.link.create({
-        data: {
-            originalUrl,
-            shortCode,
-            userId: "test-user-id", // 👈 placeholder tills vi har auth
-        },
-    })
-
-    return Response.json(link)
 }
+
+

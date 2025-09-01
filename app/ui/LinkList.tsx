@@ -38,7 +38,9 @@ export default function LinkList() {
       <ul className="mt-4 space-y-2">
         {links.map(link => (
           <li key={link.id} className="p-2 border rounded">
-            <a href={`/${link.shortCode}`} target="_blank" className="font-bold text-blue-600">{link.shortCode}</a> - {link.originalUrl}
+            <a href={`/${link.shortCode}`} target="_blank" className="font-bold text-blue-600">
+              {link.shortCode}
+            </a>
           </li>
         ))}
       </ul>
