@@ -1,12 +1,9 @@
-import { db } from "@/prisma/db";
-import TodoList from "./ui/todo-list";
+import LinkList from "./ui/LinkList";
 
-export default async function Home() {
-  const todos = await db.todo.findMany();
-
+export default function Home() {
   return (
     <main>
-      <TodoList defaultTodos={todos} />
+      <LinkList />
     </main>
   );
 }
