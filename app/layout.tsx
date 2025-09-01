@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,20 +19,29 @@ export const metadata: Metadata = {
   description: "Simple fullstack URL shortener app",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 font-sans min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 text-gray-900 font-sans min-h-screen flex flex-col`}
       >
-        <header className="bg-blue-600 text-white p-4 shadow-md">
-          <h1 className="text-xl font-bold text-center">URL Shortener</h1>
+        <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 shadow-lg relative">
+          <Image
+            src="/Link-Logo.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="absolute left-6 top-1/2 -translate-y-1/2 object-contain"
+          />
+
+          <h1 className="text-2xl md:text-3xl font-bold text-center">URL Shortener</h1>
         </header>
-        <main className="p-4 max-w-xl mx-auto">{children}</main>
+
+
+
+        <main className="flex-1 p-6 max-w-xl w-full mx-auto flex flex-col gap-6">
+          {children}
+        </main>
       </body>
     </html>
   );
