@@ -1,3 +1,4 @@
+//app/ui/LinkList.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -35,11 +36,16 @@ export default function LinkList() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ originalUrl: url }),
         })
-        if (!res.ok) return
+        if (!res.ok) {
+            const err = await res.json()
+            alert(err.error || "Failed to create link")
+            return
+        }
         const data = await res.json()
         setLinks([...links, data])
         setUrl("")
     }
+
 
     const deleteLink = async (id: string) => {
         const res = await fetch(`/api/links/${id}`, { method: "DELETE" })

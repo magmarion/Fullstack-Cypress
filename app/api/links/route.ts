@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             data: {
                 originalUrl,
                 shortCode: Math.random().toString(36).substring(2, 8),
-                userId: "68b45d1bc433b7c3d986cb66", // Hårdkodad userId för enkelhetens skull
+                userId: "68b724e9b37b0d72b9e4ee59", // Hårdkodad userId för enkelhetens skull
             },
         })
 
