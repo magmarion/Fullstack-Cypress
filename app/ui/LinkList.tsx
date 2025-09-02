@@ -1,5 +1,9 @@
 "use client"
+
 import { useState, useEffect } from "react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 
 type Link = {
   id: string
@@ -33,34 +37,34 @@ export default function LinkList() {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Input och knapp */}
+      {/* Input + Button */}
       <div className="flex flex-col sm:flex-row gap-3">
-        <input
+        <Input
           value={url}
           onChange={e => setUrl(e.target.value)}
           placeholder="Enter Long URL"
-          className="flex-1 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          className="flex-1"
         />
-        <button
-          onClick={createLink}
-          className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition font-semibold cursor-pointer"
-        >
+        <Button onClick={createLink} variant="default" size="lg">
           Create Short URL
-        </button>
+        </Button>
       </div>
 
-      {/* Lista med korta länkar */}
+      {/* List of links */}
       <ul className="flex flex-col gap-3">
         {links.map(link => (
-          <li key={link.id} className="p-4 bg-white shadow rounded hover:shadow-md transition">
-            <a
-              href={`/${link.shortCode}`}
-              target="_blank"
-              className="font-bold text-blue-600 hover:underline break-all"
-            >
-              {link.shortCode}
-            </a>
-          </li>
+          <Card key={link.id} className="hover:shadow-md transition">
+            <CardContent className="p-4">
+              <a
+                href={`/${link.shortCode}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-primary hover:underline break-all"
+              >
+                {link.shortCode}
+              </a>
+            </CardContent>
+          </Card>
         ))}
       </ul>
     </div>
