@@ -16,8 +16,8 @@ describe('URL Shortener App', () => {
 
     // Kontrollera att kort URL dyker upp i listan
     cy.get('ul li a')
-      .should('exist')
-      .and('contain.text', '/') // korta länken
+      .should('have.attr', 'href')
+      .and('match', /^\/[a-z0-9]{6}$/)
   })
 
   it('should copy the short link to clipboard', () => {
