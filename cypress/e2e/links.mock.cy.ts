@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-describe('URL Shortener App (Mockade API-anrop)', () => {
+describe('URL Shortener (Mockade API-anrop)', () => {
+    // Mock-data för länkar – används för att simulera befintliga länkar utan att röra DB
     const mockLinks = [
         {
             id: '1',
@@ -19,7 +20,7 @@ describe('URL Shortener App (Mockade API-anrop)', () => {
     ]
 
     beforeEach(() => {
-        // Mocka GET /api/links
+        // Mocka GET /api/links för att simulera att sidan laddas med befintliga länkar
         cy.intercept('GET', '/api/links', {
             statusCode: 200,
             body: mockLinks,
@@ -29,10 +30,12 @@ describe('URL Shortener App (Mockade API-anrop)', () => {
     })
 
     it('should render header correctly', () => {
+        // Kontrollera att rubrik syns – enklare UI-test
         cy.get('h1').should('contain.text', 'URL Shortener')
     })
 
     it('should display existing links', () => {
+        // Kontrollera att mockade länkar visas korrekt
         cy.get('ul li').should('have.length', mockLinks.length)
         cy.get('ul li a').first().should('contain.text', mockLinks[0].shortCode)
     })
@@ -40,6 +43,7 @@ describe('URL Shortener App (Mockade API-anrop)', () => {
     it('should create a new short link', () => {
         const longUrl = 'https://example.com/new'
 
+        // Mocka POST /api/links för att simulera att en ny länk skapas utan att skriva till DB
         cy.intercept('POST', '/api/links', {
             statusCode: 200,
             body: {
@@ -54,12 +58,14 @@ describe('URL Shortener App (Mockade API-anrop)', () => {
         cy.get('input[placeholder="Enter Long URL"]').type(longUrl)
         cy.contains('Create').click()
 
+        // Vänta på mockad POST och kontrollera att UI uppdateras korrekt
         cy.wait('@createLink')
         cy.get('ul li').should('have.length', mockLinks.length + 1)
         cy.get('ul li a').last().should('contain.text', 'new123')
     })
 
     it('should copy a link to clipboard', () => {
+        // Simulera klick på copy-knapp och kontrollera att clipboard innehåller rätt shortCode
         cy.get('ul li button').first().click()
         cy.window().then((win) => {
             return win.navigator.clipboard.readText()
@@ -67,13 +73,17 @@ describe('URL Shortener App (Mockade API-anrop)', () => {
     })
 
     it('should delete a link', () => {
+        // Mocka DELETE /api/links/:id för att simulera borttagning av länk utan DB
         cy.intercept('DELETE', '/api/links/*', { statusCode: 200 }).as('deleteLink')
 
+        // Klicka på delete-knappen på första list-item
         cy.get('ul li').first().within(() => {
             cy.get('button').eq(1).click()
         })
 
         cy.wait('@deleteLink')
+
+        // Eftersom vi mockar, uppdatera DOM manuellt om vi vill: listan minskar med 1
         cy.get('ul li').should('have.length', mockLinks.length - 1)
     })
 })

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('URL Shortener App (Test mot databas)', () => {
+describe('URL Shortener (Test mot databas)', () => {
   beforeEach(() => {
     // Rensa testdatabasen innan varje test
     // Du behöver skapa detta endpoint i backend (t.ex. POST /api/test/reset)
