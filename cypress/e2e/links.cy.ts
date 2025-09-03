@@ -21,7 +21,7 @@ describe('URL Shortener App (Test mot databas)', () => {
 
     // Kontrollera att länken nu syns i listan
     cy.get('ul li').should('have.length', 1)
-    cy.get('ul li a').first().should('contain.text', '/')
+    cy.get('ul li a').first().invoke('text').should('match', /^[a-z0-9]{6}$/)
   })
 
   it('should copy a link to clipboard', () => {
