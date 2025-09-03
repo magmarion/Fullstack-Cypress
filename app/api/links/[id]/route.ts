@@ -6,7 +6,7 @@ type Params = {
     params: { id: string }
 }
 
-// DELETE: ta bort en länk
+// Denna rut är för att DELETE: ta bort en länk
 export async function DELETE(req: Request, { params }: Params) {
     try {
         const { id } = params
