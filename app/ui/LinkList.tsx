@@ -1,7 +1,6 @@
 //app/ui/LinkList.tsx
 "use client"
 
-import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Tooltip,
@@ -9,7 +8,8 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Trash, Copy, Check } from "lucide-react"
+import { Check, Copy, Trash } from "lucide-react"
+import { useEffect, useState } from "react"
 
 type Link = {
     id: string
@@ -66,8 +66,9 @@ export default function LinkList() {
                 <input
                     value={url}
                     onChange={e => setUrl(e.target.value)}
-                    placeholder="Enter Long URL"
-                    className="flex-1 border rounded px-3 py-2"
+                    placeholder="Enter URL"
+                    className="flex-1 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3366cb]"
+
                 />
                 <Button className="text-lg p-5" onClick={createLink}>Create</Button>
             </div>
@@ -84,7 +85,7 @@ export default function LinkList() {
                                     <a
                                         href={`/${link.shortCode}`}
                                         target="_blank"
-                                        className="font-bold text-blue-600 hover:underline"
+                                        className="font-bold text-[#3366cb] hover:underline"
                                     >
                                         {link.shortCode}
                                     </a>
@@ -106,7 +107,7 @@ export default function LinkList() {
                                 {copiedId === link.id ? (
                                     <Check className="h-4 w-4 text-green-600 group-hover:text-white" />
                                 ) : (
-                                    <Copy className="h-4 w-4 text-gray-800 group-hover:text-white" />
+                                    <Copy className="h-4 w-4 text-gray-400 group-hover:text-white" />
                                 )}
                             </Button>
 
@@ -117,7 +118,7 @@ export default function LinkList() {
                                 onClick={() => deleteLink(link.id)}
                                 className="group hover:bg-[#6EA4C1]"
                             >
-                                <Trash className="h-4 w-4 text-gray-800 group-hover:text-white" />
+                                <Trash className="h-4 w-4 text-gray-400 group-hover:text-white" />
                             </Button>
                         </div>
 
