@@ -13,13 +13,14 @@ export async function seedLinks() {
       {
         userId: user.id,
         originalUrl: "https://example.com",
-        shortCode: "abc123",
+        shortCode: Math.random().toString(36).substring(2, 8),
       },
       {
         userId: user.id,
         originalUrl: "https://openai.com",
-        shortCode: "xyz789",
+        shortCode: Math.random().toString(36).substring(2, 8),
       },
     ],
-  })
+  });
+
 }
