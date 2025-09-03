@@ -1,0 +1,3 @@
+## Användarflöde
+
+Elin besöker hemsidan för att snabbt skapa en kort länk till en lång webbadress hon vill dela med sina kollegor. På startsidan ser hon rubriken 'URL Shortener' och en tom lista över länkar. Hon skriver in den långa webbadressen i inmatningsfältet och klickar på 'Create'. Den nya korta länken dyker upp direkt i listan. Hon vill dela länken och klickar på copy-knappen, och verifierar att rätt kort kod nu finns i urklipp. Sen inser hon att hon vill ta bort en av länkarna, och klickar på delete-knappen – länken försvinner från listan. Hon kan nu fortsätta använda sidan utan störningar och vet att varje steg fungerar som förväntat. 
