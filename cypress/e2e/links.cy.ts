@@ -13,6 +13,10 @@ describe('URL Shortener (Test mot databas)', () => {
     cy.get('h1').should('contain.text', 'URL Shortener')
   })
 
+  it('should display existing links', () => {
+    cy.get('ul li').should('have.length', 0)
+  })
+
   it('should create and display a new short link', () => {
     const longUrl = 'https://example.com/new'
 
