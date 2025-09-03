@@ -10,7 +10,7 @@ describe('URL Shortener (Test mot databas)', () => {
   })
 
   it('should render header correctly', () => {
-    cy.get('h1').should('contain.text', 'URL Shortener')
+    cy.get('h1').should('contain.text', 'Linkly')
   })
 
   it('should display existing links', () => {

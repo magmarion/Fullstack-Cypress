@@ -69,7 +69,7 @@ export default function LinkList() {
                     placeholder="Enter Long URL"
                     className="flex-1 border rounded px-3 py-2"
                 />
-                <Button size={"lg"} onClick={createLink}>Create</Button>
+                <Button className="text-lg p-5" onClick={createLink}>Create</Button>
             </div>
 
             <ul className="space-y-2">

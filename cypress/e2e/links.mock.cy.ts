@@ -31,7 +31,7 @@ describe('URL Shortener (Mockade API-anrop)', () => {
 
     it('should render header correctly', () => {
         // Kontrollera att rubrik syns – enklare UI-test
-        cy.get('h1').should('contain.text', 'URL Shortener')
+        cy.get('h1').should('contain.text', 'Linkly')
     })
 
     it('should display existing links', () => {
