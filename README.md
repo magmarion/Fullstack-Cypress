@@ -1,60 +1,61 @@
-# NextJS + Cypress boilerplate
+# Linkly 🔗
+
+En enkel fullstack-applikation för att förkorta långa länkar.\
+Byggd med **Next.js**, **Prisma**, **MongoDB**, **Tailwind CSS** och
+**shadcn/ui**.\
+Projektet inkluderar automatiserade **end-to-end tester** med Cypress
+(både med mockad data och riktig databas).
+
+------------------------------------------------------------------------
+
 
 ## Kom igång
 
-1. Lägg till atlas url till din databas i `.env` filen
-2. Kör `npm install` för att installera dependencies
-3. Publicera databasen med `npm run push`
-4. Seeda sedan databasen med `npm run seed`
-5. Starta utvecklingsservern med `npm run dev`
-6. Kör cypress testerna med `npm test` (startar automatiskt MongoDB och Next.js)
+### 1. Installera beroenden
 
-Nu borde du vara reda att skriva nya tester och bygga ut din app.
+``` bash
+npm install
+```
 
-## Kör Replica Set lokalt på din dator
+### 3. Miljövariabler
 
-Om du vill använda din lokal databas för utveckling så måste du köra mongodb med i ett replica set för att Prisma ska fungera.
+Skapa en `.env`-fil i projektets rot och lägg till din MongoDB URL:
 
-### MacOS
+``` env
+DATABASE_URL="mongodb+srv://<user>:<password>@cluster.mongodb.net/linkly"
+```
 
-1. Stoppa MongoDB servicen
-   `brew services stop mongodb-community@8.0`
+### 4. Databas-migrering
 
-2. Ändra konfigureringsfilen
-   `code /opt/homebrew/etc/mongod.conf`
-   och lägg till följande kod:
+Kör Prisma för att synka databasen:
 
-   ```
-   replication:
-     replSetName: rs0
-   ```
+``` bash
+npx prisma db push
+```
 
-3. Starta MongoDB servicen igen
-   `brew services start mongodb-community`
+### 5. Starta utvecklingsservern
 
-4. Öppna mongosh och initiera replica set'et
-   - `mongosh`
-   - `rs.initiate()`
-   - `rs.status()` (valfritt)
+``` bash
+npm run dev
+```
 
-## Windows
+Appen är nu tillgänglig på <http://localhost:3000>.
 
-1. Stoppa MongoDB servicen
-   `Stop-Service "MongoDB"`
+------------------------------------------------------------------------
 
-2. Ändra konfigureringsfilen
-   `code "C:\Program Files\MongoDB\Server\8.0\bin\mongod.cfg"`
-   och lägg till följande kod:
+## Testning
 
-   ```
-   replication:
-     replSetName: rs0
-   ```
+Projektet använder **Cypress** för E2E-tester.\
+Det finns två uppsättningar tester: 1. **Mockade API-anrop** → snabb
+testning utan databas\
+2. **Riktiga API-anrop** → full integration med MongoDB
 
-3. Start MongoDB servicen igen
-   `Start-Service "MongoDB"`
+### Kör Cypress tester
 
-4. Öppna mongosh och initiera replica set'et
-   - `mongosh`
-   - `rs.initiate()`
-   - `rs.status()` (valfritt)
+``` bash
+# Öppna Cypress UI
+npm test
+
+# Eller kör i terminal
+npm test:run
+```
