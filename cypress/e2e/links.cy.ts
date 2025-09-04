@@ -20,7 +20,7 @@ describe('URL Shortener (Test mot databas)', () => {
   it('should create and display a new short link', () => {
     const longUrl = 'https://example.com/new'
 
-    cy.get('input[placeholder="Enter Long URL"]').type(longUrl)
+    cy.get('input[placeholder="Enter URL"]').type(longUrl)
     cy.contains('Create').click()
 
     // Kontrollera att länken nu syns i listan
@@ -31,7 +31,7 @@ describe('URL Shortener (Test mot databas)', () => {
   it('should copy a link to clipboard', () => {
     const longUrl = 'https://example.com/copy'
 
-    cy.get('input[placeholder="Enter Long URL"]').type(longUrl)
+    cy.get('input[placeholder="Enter URL"]').type(longUrl)
     cy.contains('Create').click()
 
     cy.get('ul li button').first().click()
@@ -44,7 +44,7 @@ describe('URL Shortener (Test mot databas)', () => {
     const longUrl = 'https://example.com/delete'
 
     // Skapa en länk först
-    cy.get('input[placeholder="Enter Long URL"]').type(longUrl)
+    cy.get('input[placeholder="Enter URL"]').type(longUrl)
     cy.contains('Create').click()
     cy.get('ul li').should('have.length', 1)
 

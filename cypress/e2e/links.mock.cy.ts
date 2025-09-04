@@ -55,7 +55,7 @@ describe('URL Shortener (Mockade API-anrop)', () => {
             },
         }).as('createLink')
 
-        cy.get('input[placeholder="Enter Long URL"]').type(longUrl)
+        cy.get('input[placeholder="Enter URL"]').type(longUrl)
         cy.contains('Create').click()
 
         // Vänta på mockad POST och kontrollera att UI uppdateras korrekt
