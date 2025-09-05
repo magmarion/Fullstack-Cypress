@@ -2,11 +2,10 @@
 
 describe('URL Shortener (Test mot databas)', () => {
   beforeEach(() => {
-    // Rensa testdatabasen innan varje test
-    // Du behöver skapa detta endpoint i backend (t.ex. POST /api/test/reset)
+    // Rensar testdatabasen innan varje test
     cy.request('POST', '/api/test/reset')
 
-    cy.visit('/') // Besök startsidan
+    cy.visit('/')
   })
 
   it('should render header correctly', () => {
