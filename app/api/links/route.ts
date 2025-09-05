@@ -1,6 +1,13 @@
 // app/api/links/route.ts
 import { db } from "@/prisma/db";
 
+/**
+ * GET /api/links
+ * Fetches all links from the database.
+ *
+ * Returns a JSON response with the following shape:
+ * 
+*/
 export async function GET() {
     try {
         const links = await db.link.findMany();
